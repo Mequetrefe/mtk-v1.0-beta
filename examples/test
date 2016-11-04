@@ -1,0 +1,13 @@
+./ex01-1d_poisson_driver 14 20000 1e-1;
+./ex01-1d_poisson_driver 14 20000 1e-2;
+./ex01-1d_poisson_driver 14 20000 1e-3;
+./ex01-1d_poisson_driver 14 20000 1e-4;
+./ex01-1d_poisson_driver 14 20000 1e-5;
+./ex01-1d_poisson_driver 14 20000 1e-6;
+./ex01-1d_poisson_driver 14 20000 1e-7;
+./ex01-1d_poisson_driver 14 20000 1e-8;
+./ex01-1d_poisson_driver 14 20000 1e-9;
+./ex01-1d_poisson_driver 14 20000 1e-10;
+./ex01-1d_poisson_driver 14 20000 1e-11;
+./ex01-1d_poisson_driver 14 20000 1e-12;
+

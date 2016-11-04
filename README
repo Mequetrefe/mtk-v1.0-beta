@@ -1,0 +1,130 @@
+=== Mimetic Methods Toolkit (MTK) Version 1.0 README File ===
+=============================================================
+
+Version: Version 1.0 (Beta).
+
+Contributions and donations: http://www.csrc.sdsu.edu/mtk/
+
+By: Eduardo J. Sanchez - esanchez at mail dot sdsu dot edu
+
+=== 1. Description ===
+======================
+
+Thank you for downloading the MTK. The Mimetic Methods Toolkit (MTK) is an
+API that allows for an intuitive implementation of Mimetic Discretization
+Methods for the resolution of Partial Differential Equations, yielding numerical
+solutions that guarantee uniform order of accuracy all along the modeled
+physical domain, while ensuring the satisfaction of conservation laws, thus
+remaining faithful to the underlying physics of the problem. The library is
+fully developed in C++, thus exploiting all the well-known advantages of both,
+object-oriented application models and the extensive collection of data
+structures capabilities of this language.
+
+=== 2. Dependencies ===
+=======================
+
+This README assumes all of these libraries are installed in the following
+folder:
+
+$(HOME)/Libraries/
+
+In this version, the MTK uses ATLAS-optimized BLAS routines for the internal
+computation on some of the layers. However, ATLAS requires both BLAS and LAPACK
+in order to create their optimized distributions. Therefore, the following
+dependencies tree arises:
+
+1. LAPACK - Available from: http://www.netlib.org/lapack/
+  1.1. BLAS - Available from: http://www.netlib.org/blas/
+
+2. The GLPK - Available from: https://www.gnu.org/software/glpk/
+
+3. (Optional) ATLAS - Available from: http://math-atlas.sourceforge.net/
+  2.1. BLAS - Available from: http://www.netlib.org/blas/
+  2.2. LAPACK - Available from: http://www.netlib.org/lapack/
+
+4. (Optional) Doxygen - Available from http://www.stack.nl/~dimitri/doxygen/ -
+This is not an explicit dependence in order to build the MTK, but it is desired
+in case the user wants to generate his/her own documentation (for development
+purposes).
+
+=== 3. Installation ===
+=======================
+
+PART 1. CONFIGURATION OF THE MAKEFILE.
+
+The following steps are required the build and test the MTK. Please use the
+provided ''makefile_inc'' file, which should provide a solid template to
+start with. The following command provides help on the options for make:
+
+$ make help
+-----
+Makefile for MTK version 1.0.
+
+Options are:
+- default: builds only the library and the examples.
+- all: executes everything except the HELP and CLEAN options.
+- mtklib: builds the library, i.e. generates the archive files.
+- exmples: generates the examples.
+- gendoc: generates the documentation for the library.
+- checkheaders: checks syntax of the header files.
+
+- clean: cleans ALL the generated files.
+- cleanlib: cleans the generated archive and object files.
+- cleanexamples: cleans the generated examples executables.
+-----
+
+PART 2. INSTALL THE LIBRARY.
+
+$ make
+
+If successful you'll read (before building the examples):
+
+----- Library created! Check:
+/home/ejspeiro/Dropbox/Public/mtk/mtk-v1.0/lib/libmtk.a
+
+Examples will also be built.
+
+=== 4. Frequently Asked Questions ===
+=====================================
+
+Q: Why haven't you guys implemented GBS to build the library?
+A: I'm on it as we speak! ;)
+
+Q: When will the other flavors be ready?
+A: Soon! I'm working on getting help on developing those.
+
+Q: Is there any main reference when it comes to the theory on Mimetic Disc.
+Methods?
+A: Yes! Check: http://www.csrc.sdsu.edu/mtk/ and look for the bibliography
+within the documentation for the API.
+
+Q: Do I need to generate the documentation myself?
+A: You can if you want to... but if you DO NOT want to, just go to our website.
+
+=== 5. Contact and credits ===
+==============================
+
+MTK is a effort mainly carried on by researchers at the Computational Science
+Research Center (CSRC) at San Diego State University (SDSU). Specifically, given
+the diversity of application examples and also of theoretical contributors, the
+development in both, applied and theoretical aspects are members of:
+
+  1. Mimetic Methods Research and Development Group.
+  2. Computational Geoscience Research and Development Group.
+  3. Ocean Modeling Research and Development Group.
+
+Currently the developers are:
+
+  Jose E. Castillo, Ph.D. - castillo@myth.sdsu.edu
+  Guillermo F. Miranda, Ph.D. - unigrav@hotmail.com
+  Christopher P. Paolini, Ph.D. - paolini@engineering.sdsu.edu
+
+  Eduardo J. Sanchez, M.Sc. - esanchez at mail dot sdsu dot edu
+
+Finally, FEEL FREE to contact me with suggestions or corrections:
+
+Eduardo J. Sanchez - esanchez at mail dot sdsu dot edu
+
+Thanks and happy coding!
+
+\m/

@@ -1,0 +1,107 @@
+# Makefile for the SRC folder.
+
+include ../makefile_inc
+
+all: datastructs exectools meshesandgrids mimopers nummethods \
+  input solvers outputandvis archive
+
+DATASTRUCTS  = \
+	mtk_matrix.o \
+	mtk_dense_matrix.o \
+	mtk_crs_matrix.o \
+	mtk_ccs_matrix.o \
+	mtk_dok_matrix.o
+
+EXECTOOLS = mtk_tool_manager.o
+
+MESHESANDGRIDS = \
+	mtk_grid_manager.o \
+	mtk_1d_grid.o \
+	mtk_1d_uniform_cartesian_staggered_grid.o \
+	mtk_2d_uniform_cartesian_staggered_grid.o
+
+MIMOPERS = \
+	mtk_1d_dirichlet.o \
+	mtk_2d_bc_desc.o \
+	mtk_1d_neumann.o \
+	mtk_1d_grad.o \
+	mtk_1d_div.o \
+	mtk_1d_lap.o \
+	mtk_2d_div.o \
+	mtk_2d_grad.o\
+	mtk_2d_lap.o\
+	mtk_glpk_facade.o
+
+NUMMETHODS = mtk_system.o
+
+INPUT = mtk_steady_1d_problem.o
+
+SOLVERS =
+
+OUTPUTANDVIS = 
+
+datastructs: $(DATASTRUCTS)
+	@echo ' '
+	@echo '----- Done with compiling 3rd concern (Data Structures).'
+	@echo ' '
+
+exectools: $(EXECTOOLS)
+	@echo ' '
+	@echo '----- Done with compiling 4th concern (Execution Tools).'
+	@echo ' '
+
+meshesandgrids: $(MESHESANDGRIDS)
+	@echo ' '
+	@echo '----- Done with compiling 5th concern (Grids).'
+	@echo ' '
+
+mimopers: $(MIMOPERS)
+	@echo ' '
+	@echo '----- Done with compiling 6th concern (Mimetic Operators).'
+	@echo ' '
+
+nummethods: $(NUMMETHODS)
+	@echo ' '
+	@echo '----- Done with compiling 7th concern (Numerical Methods).'
+	@echo ' '
+
+input: $(INPUT)
+	@echo ' '
+	@echo '----- Done with compiling 8th concern (Input).'
+	@echo ' '
+
+solvers: $(SOLVERS)
+	@echo ' '
+	@echo '----- Done with compiling 9th concern (Solvers).'
+	@echo ' '
+
+outputandvis: $(OUTPUTANDVIS)
+	@echo ' '
+	@echo '----- Done with compiling 10th concern (Output).'
+	@echo ' '
+
+# Compilation statements:
+
+%.o: %.cc
+	$(CC) $(CCFLAGS) $<
+
+# Notice we create the building directory with "-p" so no prob if it exists:
+
+archive: $(DATASTRUCTS) $(EXECTOOLS) $(MESHESANDGRIDS) $(MIMOPERS) \
+  $(NUMMETHODS) $(INPUT) $(SOLVERS) $(OUTPUTANDVIS)
+	$(ARCH) $(ARCHFLAGS) $(MTKLIB) \
+	  $(DATASTRUCTS) \
+	  $(EXECTOOLS) \
+	  $(MESHESANDGRIDS) \
+	  $(MIMOPERS) \
+	  $(NUMMETHODS) \
+	  $(INPUT) \
+	  $(SOLVERS) \
+	  $(OUTPUTANDVIS)
+	$(RANLIB) $(MTKLIB)
+	@echo ' '
+	@echo '----- Library created! Check:' $(LIB)
+	@echo ' '
+
+clean:
+	rm -f *~ *.o

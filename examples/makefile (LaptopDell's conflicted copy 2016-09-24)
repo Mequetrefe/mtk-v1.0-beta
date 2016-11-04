@@ -1,0 +1,24 @@
+# Makefile for the EXAMPLES folder.
+
+include ../makefile_inc
+
+all: ex01 ex20
+
+EXE = \
+	ex01-1d_poisson_driver plot.gpl solution.dat \
+
+# Compiling statements:
+
+%.o: %.cc $(INCLUDE)/mtk.h
+	$(CC) $(CCFLAGS) $<
+
+# Linking statements:
+ex01: ex01-1d_poisson_driver.o ex01-1d_poisson_driver.cc $(INCLUDE)/mtk.h
+	$(LINKER) ex01-1d_poisson_driver.o $(LIBS) -o ex01-1d_poisson_driver
+	@echo ' '
+
+ex20: ex20-2d_poisson_driver.o ex20-2d_poisson_driver.cc $(INCLUDE)/mtk.h
+	$(LINKER) ex20-2d_poisson_driver.o $(LIBS) -o ex20-2d_poisson_driver
+	@echo ' '
+clean:
+	rm -f *~ *.o $(EXE) *.gif *.png

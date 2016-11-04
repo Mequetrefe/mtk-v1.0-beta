@@ -1,0 +1,136 @@
+/*!
+  \file mtk_2d_uniform_staggered_grid.h
+
+  \brief Includes the definition of the class MTK_2DUniformStaggeredGrid.
+
+  This file contains the definition of a class implementing a staggered grid.
+
+  \date: Saturday, April 14 2012 08:06 PM
+  \version: 2011-14-08-01.
+  \author: Eduardo J. Sanchez: esanchez@sciences.sdsu.edu
+ */
+ /*
+  Copyright (C) 2011 Computational Science Research Center (CSRC) at San Diego
+  State University (SDSU).
+
+  http:www.csrc.sdsu.edu/mtk/
+
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification are permitted provided that the following conditions are met:
+
+  -# Redistributions of source code must retain the above copyright notice,
+  this list of conditions and the following disclaimer.
+  -# Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+  -# Neither the name of the CSRC, SDSU nor the names of its contributors may
+  be used to endorse or promote products derived from this software without
+  specific prior written permission.
+  -# Modifications whether they are partial or complete; whether they are
+  additions or eliminations should be reported through an email at:
+  esanchez@sciences.sdsu.edu
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+*/
+
+#ifndef MTK_INCLUDE_MTK_2D_STAGGERED_GRID_H
+#define MTK_INCLUDE_MTK_2D_STAGGERED_GRID_H
+#include "mtk_roots.h"
+namespace mtk{
+class MTK_1DNode;
+
+/*! \brief One-dimensional uniform staggered grid of MTK_Real.
+
+  This class implements a one-dimensional uniform staggered grid of values with
+  data type MTK_Real. Notice that a nodal grid differs of a staggered grid in the
+  sense that no centers are defined.
+  \todo Monday, September 03, 2012: Move SolveInitialValue to a solver class.
+  \todo Monday, September 03, 2012: Change MTK_Real to MTKNode in the boundaries.
+*/
+class MTK_2DUniformStaggeredGrid {
+    friend class MTK_2DBCDesc;
+
+public:
+  /*! Default constructor.  */
+  /*! This procedure CONSTRUCTS a default instance. */
+  MTK_2DUniformStaggeredGrid(void);
+
+  /*! Constructs a staggered grid with start, final and step size values. */
+  /*! This procedure CONSTRUCTS an instance using the most commonly used
+    parameters given the context.
+  */
+  MTK_2DUniformStaggeredGrid(MTK_Real west_boundary_node,
+                          MTK_Real east_boundary_node,
+                          int number_of_cells_X,
+                          MTK_Real south_boundary_node,
+                          MTK_Real north_boundary_node,
+                          int number_of_cells_Y);
+
+  /*! Default destructor.  */
+  /*! This procedure DESTRUCTS an already created instance. */
+  ~MTK_2DUniformStaggeredGrid() {
+    delete [] nodes_X_;
+    delete [] nodes_Y_;
+  }
+
+  /*! Print formatted as a one-dimensional array.  */
+  /*! This procedure prints the nodal grid in the format of a 1D array. */
+  void Print2DArray(void);
+  
+  MTK_Real valuesX(int);
+  
+  MTK_Real valuesY(int);
+  
+
+  /*! Gets the nodes.  */
+  /*! Gets the nodes. */
+  MTK_1DNode** nodes_X(void) { return nodes_X_; }
+  MTK_1DNode** nodes_Y(void) { return nodes_Y_; }
+
+  /*! Gets the node at the west boundary.  */
+  /*! Gets the node at the west boundary. */
+  MTK_Real west_boundary_node(void) { return west_boundary_node_; }
+
+  /*! Gets the node at the east boundary.  */
+  /*! Gets the node at the east boundary. */
+  MTK_Real east_boundary_node(void) { return east_boundary_node_; }
+
+  /*! Gets the nodes step size.  */
+  /*! Gets the nodes step size. */
+  MTK_Real nodes_grid_step_size_X(void) { return nodes_grid_step_size_X_; }
+
+  MTK_Real south_boundary_node(void) { return south_boundary_node_; }
+  MTK_Real north_boundary_node(void) { return north_boundary_node_; }
+
+  
+  MTK_Real nodes_grid_step_size(void) { return nodes_grid_step_size_Y_; }
+
+  /*! Print formatted as a one-dimensional array.  */
+  /*! This procedure prints the nodal grid in the format of a 1D array. */
+  int number_of_cells_X(void) { return number_of_cells_X_; }
+  int number_of_cells_Y(void) { return number_of_cells_Y_; }
+
+private:
+  MTK_1DNode **nodes_X_;     /*!< Collection of nodes X. */
+  MTK_1DNode **nodes_Y_;     /*!< Collection of nodes Y. */
+
+  MTK_Real west_boundary_node_;   /*!< West boundary node. */
+  MTK_Real east_boundary_node_;   /*!< East boundary node. */
+  MTK_Real nodes_grid_step_size_X_; /*!< Step size defining the grid. */
+  int number_of_cells_X_;         /*!< Number of cells. */
+
+  MTK_Real south_boundary_node_;   /*!< West boundary node. */
+  MTK_Real north_boundary_node_;   /*!< East boundary node. */
+  MTK_Real nodes_grid_step_size_Y_; /*!< Step size defining the grid. */
+  int number_of_cells_Y_;         /*!< Number of cells. */
+};
+}
+#endif
